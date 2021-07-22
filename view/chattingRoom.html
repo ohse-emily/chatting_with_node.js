@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chattingRoom</title>
+    <link rel="stylesheet" href="../index.css" type="text/css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <div id="chatRoom_place">
+        <div id="chatRoom_place_box">
+            <!--채팅 나오는 곳 -->
+        </div>
+        <div id="chatRoom_inputbox">
+            <input type="text" id="msg" onkeydown="enterSend()">
+            <div id="chatSend_div">
+                <button id="chatSend" onclick="send()">전송</button>
+            </div>
+        </div>
+    </div>
+    <!--유저 아이디, 비밀번호 써서 post 넘기기 or get으로-->
+    <div id="chatting_info">
+        <div id="chatRoom_top">
+            <div id="chatRoom_main_box" class="topBox">
+                <span>채팅방 이름 : </span><span id="chatRoom_name">{{chatRoom_name}}</span>
+            </div>
+            <div class="topBox">
+                <span>공개 여부 : {{radio1}}</span>
+            </div>
+            <div class="topBox">
+                <span id="chatting_bangjang">방장 : {{chatRoom_nickname}}</span>
+            </div>
+        </div>
+        <div id="chatthing_users">
+            <div id="chatRoom_users">
+                <p>현재 채팅 참여 users</p>
+
+                <div id="chatRoom_users_list">
+
+                </div>
+            </div>
+
+        </div>
+        <div id="chatting_out">
+            <div>
+                <a href="/chat">채팅방 나가기</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div id="user_nickname" style="display: none;">{{user_nickname}}</div>
+    <div id="chatRoom_name" style="display: none;">{{chatRoom_name}}</div>
+    <div id="chatRoom_nickname" style="display: none;">{{chatRoom_nickname}}</div>
+    <script type="text/javascript" src='../js/chat.js'></script>
+</body>
+
+</html>

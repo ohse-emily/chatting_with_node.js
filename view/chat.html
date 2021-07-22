@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat</title>
+    <link rel="stylesheet" href="index.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js
+    "></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+
+            // 채팅방 개설 click - > 개설 page 보이기 
+            let openChat_flag = false;
+            let openChatBtn = document.querySelector('.chatRoom_open_btn');
+            openChatBtn.addEventListener('click', async () => {
+                let chatRoom_open = document.querySelector('#chatRoom_open')
+                let chatRoom_open_btn = document.querySelector('.chatRoom_open_btn');
+                if (openChat_flag == false) {
+                    let url = 'http://localhost:3000/chat/openChatRoom';
+                    let options = { method: 'get', };
+                    let response = await fetch(url, options);
+                    let res_body = await response.text();
+                    chatRoom_open.innerHTML = res_body;
+                    chatRoom_open_btn.innerHTML = ' 닫기 ';
+
+                } else {
+                    chatRoom_open.innerHTML = '';
+                    chatRoom_open_btn.innerHTML = '채팅방 개설하기'
+                }
+                openChat_flag = !openChat_flag;
+
+                // 채팅방 개설 버튼 클릭 시 
+                let open_submit = document.querySelector('#open_submit')
+                let chatRoom_submit_btn = document.querySelector('#chatRoom_submit_btn')
+                chatRoom_submit_btn.addEventListener('click', openChat)
+                function openChat() {
+                    // 채팅방 이름 / 닉네임 / 비밀번호 검사 
+                    let chatRoom_name = document.querySelector('#chatRoom_name');
+                    let chatRoom_nickname = document.querySelector('#chatRoom_nickname');
+                    let secretChat = document.querySelector('#secretChat');
+                    let pw1 = document.querySelector('#chatRoom_password1');
+                    let pw2 = document.querySelector('#chatRoom_password2');
+                    let open_p = document.querySelectorAll('.open_p');
+
+                    open_p.forEach(v => { v.innerHTML = ''; })
+
+                    if (chatRoom_name.value.length <= 4) {
+                        open_p[0].innerHTML = '채팅방 이름은 5글자 이상으로 설정해주세요.';
+                        chatRoom_name.cursur();
+                    }
+                    if (chatRoom_nickname.value.length <= 4) {
+                        open_p[1].innerHTML = '닉네임은 5글자 이상으로 입력해주세요';
+                        chatRoom_nickname.cursur();
+                    }
+                    if (secretChat.checked) {
+                        if (chatRoom_password1.value.length <= 5) {
+                            open_p[2].innerHTML = '비밀번호는 6글자 이상으로 설정해주세요.';
+                            chatRoom_password1.cursur();
+                        }
+                        if (pw1.value != pw2.value) {
+                            open_p[3].innerHTML = '비밀번호가 서로 다릅니다.';
+                            pw1.cursur();
+                        }
+                    } //검사 완료 후 채팅방 개설 
+                    open_submit.submit();
+                }
+            })
+        }
+
+        // 비공개 채팅 radio checked 경우
+        function RadioCheck() {
+            if (secretChat.checked == true) {
+                openChat_pw.classList.remove('pw_none');
+                openChat_pw.classList.add('pw_block');
+            } else {
+                openChat_pw.classList.add('pw_none');
+                openChat_pw.classList.remove('pw_block');
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id="All_user_arr"></div>
+    <div class="chat_wrap">
+        <div id="chatRoom_open_box">
+            <div id="chat_main" class="chat_common">
+                <h1> TALK BANG</h1>
+            </div>
+            <div id="chatRoom_open_div">
+                <div id="chatRoom_open">
+
+                </div>
+                <button class="chatRoom_open_btn">채팅방 개설하기</button>
+
+            </div>
+        </div>
+        <div>
+            <h2 id="chat_ing_h2"> 현재 진행 중인 채팅방</h2>
+            <h4> 입장하실 채팅방을 Click 해주세요 ! </h4>
+            <div id="chatRoom_entering"></div>
+            {% for item in room_arr %}
+            <div class="chatRoom_user" onclick='user_nickname(this)'>
+                <div class="chatRoom_name" style="display: none;">{{item[1]}}</div>
+                <div class="chatRoom_radio" style="display: none;">{{item[3]}}</div>
+                <div class="chatRoom_nickname" style="display: none;">{{item[2]}}</div>
+                
+                <div class="chatRoom_box">
+                    <a class="chatRoom">
+                        <!-- href="/chat/user_goto_chatroom?chatRoom_name={{item[0]}}" -->
+                        <tr class="chatRoom_tr">
+                            <td class="chatRoom_td">채팅방 : {{item[1]}} <br /></td>
+                        </tr>
+                        <tr class="chatRoom_tr">
+                            <td id="chatRoom_bangjang" > 방장 : {{item[2]}} <br /></td>
+                        </tr>
+                        {% if item[3]==false %}
+                        <tr class="chatRoom_tr">
+                            <td class="chatRoom_td"> (비공개 채팅) </td>
+                        </tr>
+                        {% else %}
+                        <tr class="chatRoom_tr">
+                            <td class="chatRoom_td"> (오픈 채팅)</td>
+                        </tr>
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        // user가 현재 진행 중인 채팅방 클릭 시 
+        async function user_nickname(event) {
+            let chatRoom_entering = document.querySelector('#chatRoom_entering');
+            chatRoom_entering.innerHTML = '';
+            let chatRoom_name = event.querySelector('.chatRoom_name').innerHTML;
+            let radio = event.querySelector('.chatRoom_radio').innerHTML;
+            let chatRoom_nickname = event.querySelector('.chatRoom_nickname').innerHTML;
+
+            // 비공개 방 입장 시 0 / 오픈 채팅 1 
+            let url = `http://localhost:3000/chat/user_write_id?chatRoom_name=${chatRoom_name}&chatRoom_nickname=${chatRoom_nickname}&radio=${radio}&flag=`;
+            url = (radio == 'false') ? url + '0' : url + '1';
+            let options = { mothod: 'get' }
+            let response = await fetch(url, options)
+            let res_body = await response.text();
+            let div = document.createElement('div')
+            div.innerHTML = res_body;
+            chatRoom_entering.appendChild(div);
+
+            // input value 검사 &  입장하려는 채팅방의 비밀번호 비교 검사
+            user_submit_btn.addEventListener('click', () => {
+                let user_nickname = document.querySelector('#user_nickname');
+                let user_submit_btn = document.querySelector('#user_submit_btn');
+                let user_submit_form = document.querySelector('#user_submit_form');
+                let user_password_input = document.querySelector('#user_password');
+                let entering_p = document.querySelectorAll('.entering_p');
+                entering_p.forEach(v => { v.innerHTML = '' });
+
+                if (user_nickname.value.length <= 4) {
+                    entering_p[0].innerHTML = '닉네임은 5글자 이상으로 설정해주세요.'
+                    return 0;
+                }
+
+                // 오픈 채팅방의 경우 
+                if (radio == 'true') {
+                    user_submit_form.submit();
+                } else { // 비밀방일 경우 
+                    user_password = user_password_input.value;
+                    if (user_password.length <= 0) {
+                        entering_p[1].innerHTML = '비밀 채팅방은 비밀번호가 필요합니다.';
+                        return 0;
+                    }
+                    console.log(user_password, chatRoom_name)
+                    axios.get(`http://localhost:3000/chat/chatRoom_pw_check?user_password=${user_password}&chatRoom_name=${chatRoom_name}`)
+                        .then((res) => {
+                            if (!res.data.result) {
+                                alert(`${chatRoom_name}의 채팅방 비밀번호가 아닙니다. 다시 시도해 주십시오.`);
+                            } else {
+                                user_submit_form.submit();
+                            }
+                        }).catch((e) => {
+                            console.log(e)
+                        })
+                }
+            })
+        }
+
+    </script>
+</body>
+
+</html>

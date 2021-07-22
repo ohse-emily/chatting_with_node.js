@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user_write_id</title>
+    <style type="stylesheet" href="../index.css"></style>
+</head>
+
+<body>
+    <!-- 비공개 == 1  -->
+
+    <div>
+        <h3>사용하실 닉네임을 입력해주세요.</h3>
+    </div>
+    <div>
+        <form method="post" action="/chat/user_goto_chatroom_by_post" id="user_submit_form">
+            <ul>
+                <li>
+                    닉네임 :
+                    <input type="text" id="user_nickname" name="user_nickname">
+                    <p class="entering_p"></p>
+                </li>
+                {% if flag == 0 %}
+                <li>
+                    비밀 번호 :
+                    <input type="password" id="user_password" name="user_password">
+                    <p class="entering_p"></p>
+                </li>
+                {% endif %}
+            </ul>
+            <div id="user_submit_btn">입 장</div>
+            <input name="chatRoom_nickname" style="display: none;" value="{{chatRoom_nickname}}">
+            <input name="chatRoom_name" style="display: none;" value="{{chatRoom_name}}">
+            <input name="radio" style="display: none;" value="{{radio}}">
+        </form>
+    </div>
+</body>
+
+</html>

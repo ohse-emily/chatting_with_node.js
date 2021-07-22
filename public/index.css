@@ -1,0 +1,415 @@
+/*  공 통  */
+body{padding:2rem;}
+a{text-decoration: none;color:black;}
+ul,li{list-style: none;}
+
+
+
+/*  index.html  */
+
+.margin-top{
+    margin-top:3rem;
+}
+
+.margin-top>h1{
+    margin-bottom: 3rem;
+    color: dar;
+}
+
+
+#talkbang_btn{
+    padding:0.5rem 1rem;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    border-radius: 0.4rem;
+    font-size: 0.9rem;
+    border:1px solid black;
+}
+
+#talkbang_btn:hover{
+    background-color:  rgb(255, 255, 255);
+    border:1px solid rgb(60, 169, 169);
+    color:rgb(60, 169, 169);
+}
+
+/* chat.html */
+
+.chat_wrap{
+    width:70rem;
+    height:50rem;
+    text-align: center;
+}
+
+#chatRoom_open_box{
+    width:100%;
+    height:27rem;
+    background-color: rgb(248, 228, 228);
+    padding: 1rem;
+    border-radius: 5rem;
+}
+
+
+
+#chat_ing_h2{
+    padding:1rem 0 0 0;
+}
+
+#chatRoom_open_div{
+    position: relative;
+}
+
+.chatRoom_open_btn{
+    padding:0.5rem 1rem;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    border-radius: 0.4rem;
+    font-size: 0.9rem;
+    border:1px solid black;
+    position: absolute;
+    left:50%;
+    transform: 50%;
+}
+
+.chatRoom_open_btn:hover{
+    background-color:  rgb(255, 255, 255);
+    border:1px solid rgb(60, 169, 169);
+    color:rgb(60, 169, 169);
+}
+
+#chatRoom_submit_btn{
+    padding:0.5rem 1rem;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    border-radius: 0.4rem;
+    font-size: 0.9rem;
+    border:1px solid black;
+    position: absolute;
+    left: 50%;
+    transform: translateX(80%);
+}
+
+#chatRoom_submit_btn:hover{
+    background-color:  rgb(255, 255, 255);
+    border:1px solid rgb(60, 169, 169);
+    color:rgb(60, 169, 169);
+}
+
+.chatRoom_user{
+    width:15rem;
+    height:6rem;
+    padding:1rem;
+    display: inline-block;
+}
+
+
+
+.chatRoom_box{
+
+}
+
+.chatRoom{
+    width:15rem;
+    height:5.5rem;
+    background-color: rgb(230, 245, 255);
+    border:1px solid rgb(149, 202, 202);
+    margin-top:5px;
+    padding:0.6rem;
+    box-sizing: border-box;
+    text-align: center;
+    display: inline-block;
+    float: left;
+    border-radius: 2rem;
+}
+.chatRoom:hover{
+    transition: ease-in-out .3s;
+    border:1px solid rgb(255, 171, 186);
+    background-color: rgb(255, 234, 242);
+    cursor: pointer;
+}
+
+.chatRoom_tr{
+    padding:1rem;
+}
+
+.chatRoom_td{
+
+}
+
+
+/*   user_write_id.html    */ 
+
+#user_submit_btn{
+    width: 4rem;
+    height:1.5rem;
+    background-color: white;
+    padding:0.5rem 1rem;
+    color: rgb(199, 128, 105);
+    font-size:1rem;
+    border:1px solid darksalmon;
+    border-radius: 0.5rem;
+    margin:20px auto;
+    
+    
+}
+
+#user_submit_btn:hover{
+    background-color: darksalmon;
+    color:white;
+}
+
+
+
+
+
+/*  chat.html의 openChatRoom.html  */
+
+.open_p{
+    color:red;
+    font-size: 1rem;
+}
+.entering_p{
+    color:red;
+    font-size: 1rem;
+    /* display: inline-block; */
+}
+/* 
+
+
+
+/* chatting room */
+#chatRoom_top {
+    width: 15rem;
+    height: 10rem;
+    background-color: rgb(255, 255, 255);
+    border:1px solid darkcyan;
+    padding:1rem;
+}
+
+.topBox {
+    padding:0.9rem 0;
+}
+
+#chatRoom_place {
+    width: 35rem;
+    height: 50rem;
+    background-color: rgb(168, 204, 206);
+    padding: 2rem;
+    display: inline-block;
+    float:left;
+}
+
+#chatRoom_place_box {
+    width: 35.5rem;
+    height: 45rem;
+    background-color: aliceblue;
+    overflow: hidden;
+}
+#chatRoom_place_box:hover{
+    overflow: auto;
+}
+
+
+#chatRoom_place_box>div {
+    width: 100%;
+    height: 3rem;
+}
+
+#chatRoom_inputbox {
+    padding: 1.5rem 1rem 1rem 0.3rem;
+}
+
+#chatRoom_inputbox>input {
+    width: 28rem;
+    height: 2.5rem;
+    border: 2px solid darkcyan;
+    border-radius: 5px;
+}
+
+#chatSend_div {
+    display: inline-block;
+    float: right;
+    margin-top: 0.05rem;
+}
+
+#chatSend {
+    font-size: 1.3rem;
+    padding: 0.45rem 1.1rem;
+    background-color: darkcyan;
+    color: white;
+    border: 2px solid darkcyan;
+    border-radius: 5px;
+
+}
+
+.me {
+    float: right;
+    font-size: 1.2rem;
+    border-radius: 15px;
+    padding: 0.5rem 1rem;
+    background-color: rgb(255, 205, 205);
+    margin-right: 5px;
+}
+
+.you {
+    float: left;
+    font-size: 1.2rem;
+    border-radius: 15px;
+    padding: 0.5rem 1rem;
+    background-color: rgb(180, 231, 255);
+    margin-left: 5px;
+}
+
+#chatRoom_place_box>.entering {
+    color: dimgray;
+    text-align: center;
+    width:100%;
+    height:2rem;
+}
+
+
+
+.entering>span {
+    font-size: 0.90rem;
+    line-height: 3rem;
+}
+
+
+#chatRoom_place_box>.block_div {
+    color: dimgray;
+    text-align: center;
+    width:100%;
+    height:7rem;
+}
+
+
+.block_span{
+    font-size: 1rem;
+    color:rgb(216, 79, 107);
+    display: block;
+    line-height:1.8rem;
+    width:100%;
+}
+
+.block_span3{
+    margin-bottom: 10px;
+}
+
+/* chattingRoom.html info parg */
+
+#chatting_info{
+    display: inline-block;
+    float:left;
+    padding:0 1rem;
+}
+
+
+
+#chatRoom_users {
+    width: 15rem;
+    height: 33.5rem;
+    border:1px solid darkcyan;
+    padding:1rem;
+    margin-top:1rem;
+    text-align: center;
+    font-size: 1.3rem;
+    overflow: hidden;
+}
+
+#chatRoom_users:hover{
+    overflow: auto;
+}
+
+
+
+#chatting_users{
+    padding:0 1rem;
+    display: inline-block;
+    float:left;
+}
+
+
+#chatRoom_place_box>.chatRoom_userID{
+    width:100%;
+    height:1.5rem;
+    color: black;
+    padding:0 0 0 .5rem;
+    box-sizing: border-box;
+    width:100%;
+    height:1.5rem;
+}
+
+#chatRoom_place_box>.chatRoom_userID_me{
+    width:100%;
+    height:1.5rem;
+    color: black;
+    padding:0 1.4rem 0 0;
+    box-sizing: border-box;
+    width:100%;
+    height:1.5rem;
+    text-align: right;
+}
+
+#chatRoom_place_box>.chatRoom_userID_me>span{
+    padding: 0 0.7rem 0 0;
+}
+
+#chatting_out{
+    width: 15rem;
+    height: 100%;
+    border:1px solid darkcyan;
+    padding:1rem;
+    margin-top:1rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+#chatting_out:hover{
+    background-color: rgb(211, 228, 228);
+    cursor: pointer;
+}
+
+
+.chatRoom_user_div{
+    height:2rem;
+    cursor: pointer;
+    
+}
+
+
+.chatRoom_user_div>p:hover{
+    color:rgb(211, 79, 140);
+}
+
+.chatRoom_user_p{
+    width:100%;
+    height:1rem;
+    padding:0;
+}
+.p_for_block{
+    display: none;
+    width:2.5rem;
+    height:2.5rem;
+    border-radius: 3rem;
+    background-color: rgb(255, 160, 125);
+    color:white;
+    margin-left:12rem;
+    transition: ease-in-out .3s ;
+    font-size: 1rem;
+    margin-top:-18%;
+    padding:8px 0 0 0;
+    box-sizing: border-box;
+}
+
+.chatRoom_user_div>.p_for_block:hover{
+    cursor: pointer;
+    background-color: rgb(255, 68, 0);
+    color:white;
+}
+
+.display_none{
+    display: none;
+}
+
+.display_block{
+    display:block;
+}

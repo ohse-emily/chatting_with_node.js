@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>openChatRoom</title>
+    <style>
+        ul,li {list-style: none;};
+        #openChatRoom_wrap {color: rgb(25, 80, 20);}
+        .pw_block {display: block;}
+        .pw_none {display: none;}
+    </style>
+</head>
+
+<body>
+    <div id="openChatRoom_wrap">
+        <div>
+            <h3>채팅방 개설하기</h3>
+        </div>
+        <div>
+            <form id="open_submit" method="post" action="chat/openChatInfo">
+                <ul>
+                    <li class="openChat_li">
+                        채팅방 이름:
+                        <input type="text" id="chatRoom_name" name="chatRoom_name">
+                        <p class="open_p"></p>
+                    </li>
+                    <li class="openChat_li">
+                        닉네임 :
+                        <input type="text" id="chatRoom_nickname" name="chatRoom_nickname">
+                        <p class="open_p"></p>
+                    </li>
+                    <li class="openChat_li">
+                        공개 여부
+                        <input type="radio" id="openChat" name="radio" for="openChat" value='1' checked
+                            onChange="RadioCheck()">
+                        오픈 채팅방
+                        <input type="radio" id="secretChat" name="radio" for="secretChat" value='0'
+                            onChange="RadioCheck()"> 비공개 방
+                    </li>
+                </ul>
+                <ul id="openChat_pw" class="openChat_pw pw_none">
+                    <li>
+                        <h3>비공개 채팅방인 경우 비밀번호를 필수로 입력해주세요.</h3>
+                        비밀번호 :
+                        <input type="password" id="chatRoom_password1" name="chatRoom_password1">
+                        <p class="open_p"></p>
+                    </li>
+                    <li>
+                        비밀번호 확인 :
+                        <input type="password" id="chatRoom_password2" name="chatRoom_password2">
+                        <p class="open_p"></p>
+                    </li>
+                </ul>
+
+                <div id="chatRoom_submit_btn">개설하기</div>
+
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src='../js/chat.js'></script>
+</body>
+
+</html>
